@@ -10,7 +10,21 @@ struct Person {
     age: usize,
 }
 
-// I AM NOT DONE
+impl Person {
+    fn parse_name(s: &str) -> Option<String> {
+        match s.len() {
+            0 => None,
+            _ => Some(String::from(s))
+        }
+    }
+
+    fn parse_age(s: &str) -> Option<usize> {
+        match s.parse::<usize>() {
+            Ok(i) => Some(i),
+            Err(_) => None
+        }
+    }
+}
 
 // Steps:
 // 1. If the length of the provided string is 0 an error should be returned
@@ -24,7 +38,21 @@ struct Person {
 
 impl FromStr for Person {
     type Err = String;
+
     fn from_str(s: &str) -> Result<Person, Self::Err> {
+        if s.len() == 0 { return Err("Empty Input".to_string()) };
+
+        let attributes = s.split(",").collect::<Vec<&str>>();
+
+        if attributes.len() < 2 { return Err(String::from("Please provide a name and an age")) };
+
+        let name = Self::parse_name(&attributes[0]);
+        let age = Self::parse_age(&attributes[1]);
+
+        match (name, age) {
+            (Some(name), Some(age)) => Ok(Person { name,  age }),
+            (_, _) => Err("Invalid inputs".into())
+        }
     }
 }
 
