@@ -7,6 +7,22 @@ struct Person {
     age: usize,
 }
 
+impl Person {
+    fn parse_name(s: &str) -> Option<String> {
+        match s.len() {
+            0 => None,
+            _ => Some(String::from(s))
+        }
+    }
+
+    fn parse_age(s: &str) -> Option<usize> {
+        match s.parse::<usize>() {
+            Ok(i) => Some(i),
+            Err(_) => None
+        }
+    }
+}
+
 // We implement the Default trait to use it as a fallback
 // when the provided string is not convertible into a Person object
 impl Default for Person {
@@ -33,32 +49,22 @@ impl Default for Person {
 // If while parsing the age, something goes wrong, then return the default of Person
 // Otherwise, then return an instantiated Person object with the results
 
-// I AM NOT DONE
-
 impl From<&str> for Person {
     fn from(s: &str) -> Person {
         if s.len() == 0 { return Person::default(); }
 
-        let mut attributes = s.split(",");
+        let attributes = s.split(",").collect::<Vec<&str>>();
 
-        let name = match attributes.next() {
-            Some(str) => String::from(str),
-            None => return Person::default() 
-        };
+        if attributes.len() < 2 { return Person::default(); }
 
-        if name.len() == 0 { return Person::default(); }
+        let name = Self::parse_name(&attributes[0]);
+        let age = Self::parse_age(&attributes[1]);
 
-        let age_string = match attributes.next() {
-            Some(str) => str,
-            None => return Person::default() 
-        };
+        match (name, age) {
+            (Some(name), Some(age)) => Person { name,  age },
+            (_, _) => Person::default()
+        }
 
-        let age = match age_string.parse::<usize>() {
-            Ok(i) => i,
-            Err(e) => return Person::default() 
-        };
-
-        Person { name: name, age: age }
     }
 }
 
