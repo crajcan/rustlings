@@ -64,7 +64,6 @@ impl From<&str> for Person {
             (Some(name), Some(age)) => Person { name,  age },
             (_, _) => Person::default()
         }
-
     }
 }
 
