@@ -655,6 +655,34 @@
       "contributions": [
         "maintenance"
       ]
+    },
+    {
+      "login": "wsh",
+      "name": "Will Hayworth",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/181174?v=4",
+      "profile": "http://willhayworth.com",
+      "contributions": [
+        "content"
+      ]
+    },
+    {
+      "login": "chrizel",
+      "name": "Christian Zeller",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/20802?v=4",
+      "profile": "https://github.com/chrizel",
+      "contributions": [
+        "content"
+      ]
+    },
+    {
+      "login": "jfchevrette",
+      "name": "Jean-Francois Chevrette",
+      "avatar_url": "https://avatars.githubusercontent.com/u/3001?v=4",
+      "profile": "https://github.com/jfchevrette",
+      "contributions": [
+        "content",
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 8,
